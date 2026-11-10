@@ -1,0 +1,18 @@
+[Unit]
+Description=EasyOCR Document Recognition Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/easyocr
+Environment=CUDA_VISIBLE_DEVICES=0
+Environment=PATH=/opt/easyocr/venv/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/opt/easyocr/venv/bin/python /opt/easyocr/server.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
